@@ -1,5 +1,6 @@
 import Header from "@src/layout/Header";
 import Nav from "@src/layout/Nav";
+import ASide from "@src/layout/ASide";
 import Main from "@src/layout/Main";
 import Footer from "@src/layout/Footer";
 
@@ -7,11 +8,15 @@ import Footer from "@src/layout/Footer";
 const GeneralLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <>
-      <Header>
-        <Nav />
-      </Header>
+      <Header />
 
-      <Main>{children}</Main>
+      <div className="flex">
+        <ASide>
+          <Nav />
+        </ASide>
+
+        <Main>{children}</Main>
+      </div>
 
       <Footer />
     </>
