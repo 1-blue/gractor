@@ -6,6 +6,8 @@ import { CreateDto } from "./dto/CreateDto";
 import { FindManyDto } from "./dto/FindManyDto";
 import { UpdateDto } from "./dto/UpdateDto";
 
+import type { FloatingPopulation } from "@prisma/client";
+
 @Injectable()
 export class FloatingPopulationService {
   private readonly prismaService: PrismaService;
@@ -28,6 +30,21 @@ export class FloatingPopulationService {
         },
       },
     });
+  }
+  /** 2023/08/08 - 모든 유동인구 찾기 ( 같은 이름끼리 그룹화 ) - by 1-blue */
+  async findAll() {
+    return (
+      await this.prismaService.floatingPopulation.findMany({
+        include: { coords: { select: { latitude: true, longitude: true } } },
+      })
+    ).reduce<{
+      [key: string]: FloatingPopulation[];
+    }>((group, curr) => {
+      const { name } = curr;
+      group[name] = group[name] ?? [];
+      group[name].push(curr);
+      return group;
+    }, {});
   }
   /** 2023/08/07 - 단일 유동인구 찾기 - by 1-blue */
   async findOne(floatingPopulationIdx: number) {

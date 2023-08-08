@@ -29,26 +29,31 @@ export class FloatingPopulationController {
   async create(@Body() body: CreateDto) {
     return await this.floatingPopulation.create(body);
   }
+  /** 2023/08/08 - 모든 유동인구들 찾기 - by 1-blue */
+  @Get("all")
+  async findAll() {
+    return await this.floatingPopulation.findAll();
+  }
   /** 2023/08/07 - 단일 유동인구 찾기 - by 1-blue */
   @Get(":floatingPopulationIdx")
   async findOne(@Param("floatingPopulationIdx") floatingPopulationIdx: number) {
     return await this.floatingPopulation.findOne(floatingPopulationIdx);
   }
-  @Get("")
   /** 2023/08/07 - 유동인구들 찾기 - by 1-blue */
+  @Get("")
   async findMany(@Query() query: FindManyDto) {
     return await this.floatingPopulation.findMany(query);
   }
-  @Patch(":floatingPopulationIdx")
   /** 2023/08/07 - 유동인구 수정 - by 1-blue */
+  @Patch(":floatingPopulationIdx")
   async update(
     @Param("floatingPopulationIdx") floatingPopulationIdx: number,
     @Body() body: UpdateDto,
   ) {
     return await this.floatingPopulation.update(floatingPopulationIdx, body);
   }
-  @Delete(":floatingPopulationIdx")
   /** 2023/08/07 - 유동인구 삭제 - by 1-blue */
+  @Delete(":floatingPopulationIdx")
   async delete(@Param("floatingPopulationIdx") floatingPopulationIdx: number) {
     return await this.floatingPopulation.delete(floatingPopulationIdx);
   }
