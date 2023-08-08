@@ -21,6 +21,34 @@ export default {
           text: "#c7d2fe",
           line: "#37446b",
         },
+        sub: {
+          50: "#f9fafb",
+          100: "#f3f4f6",
+          200: "#e5e7eb",
+          300: "#d1d5db",
+          400: "#9ca3af",
+          500: "#6b7280",
+          600: "#4b5563",
+          700: "#374151",
+          800: "#1f2937",
+          900: "#111827",
+          950: "#030712",
+        },
+      },
+
+      fontSize: {
+        xxs: "0.625rem",
+      },
+
+      keyframes: {
+        "skeleton-gradient": {
+          "0%": { backgroundColor: "rgba(165, 165, 165, 0.1)" },
+          "50%": { backgroundColor: "rgba(165, 165, 165, 0.5)" },
+          "100%": { backgroundColor: "rgba(165, 165, 165, 0.1)" },
+        },
+      },
+      animation: {
+        "skeleton-gradient": "skeleton-gradient 1.4s infinite ease-in-out",
       },
     },
   },

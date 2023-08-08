@@ -1,0 +1,6 @@
+/* input[type="number"] 우측 화살표 버튼 없애기 */
+input::-webkit-inner-spin-button {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
