@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// 유동인구
+model FloatingPopulation {
+  idx Int @default(autoincrement()) @id
+  name String @db.VarChar(40)
+  amount Int
+  date DateTime
+
+  // 1 : N
+  coords Coords @relation(fields: [coordsIdx], references: [idx], onUpdate: Cascade, onDelete: Cascade)
+  coordsIdx Int
+}
+
+// 좌표 ( 위도/경도 )
+model Coords {
+  idx Int @default(autoincrement()) @id
+  latitude Float
+  longitude Float
+
+  // 1 : N
+  floatingPopulations FloatingPopulation[]
+
+  @@unique([latitude, longitude])
+}
