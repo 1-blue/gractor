@@ -81,7 +81,11 @@ const Manage: React.FC = () => {
     setValue("amount", amount);
     setValue("latitude", latitude);
     setValue("longitude", longitude);
-    setDefaultDate(new Date(date).toISOString().slice(0, -1));
+
+    const offset = 1000 * 60 * 60 * 9; // 9시간
+    const dateOffset = new Date(new Date(date).getTime() + offset);
+    setDefaultDate(dateOffset.toISOString().slice(0, -1));
+
     setFocus("date");
   }, [floatingPopulation, setValue, setFocus]);
 
@@ -97,6 +101,7 @@ const Manage: React.FC = () => {
         required
         placeholder="(주) 그렉터"
         defaultValue={isDevelopment ? "(주) 그렉터" : ""}
+        info="위도/경도가 이미 등록되어있는 위치라면 해당 이름으로 등록됩니다."
         error={errors.name?.message}
         {...register("name", {
           required: {
