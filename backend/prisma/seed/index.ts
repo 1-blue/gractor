@@ -18,7 +18,7 @@ const getMocFloatingPopulation = (
     .map((v) => ({
       name,
       amount: value * Math.ceil(Math.random() * 100),
-      date: new Date(2023, 9, 8, v - 1, 0, 0),
+      date: new Date(2023, 7, 10, v - 1, 0, 0),
       coordsIdx,
     }));
 

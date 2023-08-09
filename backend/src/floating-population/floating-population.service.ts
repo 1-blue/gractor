@@ -75,7 +75,7 @@ export class FloatingPopulationService {
       this.prismaService.floatingPopulation.findMany({
         skip: from * size,
         take: size,
-        orderBy: [{ date: "desc" }],
+        orderBy: [{ name: "desc" }, { date: "desc" }],
       }),
     ]);
 
