@@ -1,4 +1,4 @@
-import type { Coords, FloatingPopulation } from ".";
+import type { Coords, FloatingPopulation, PageInfo } from ".";
 
 /** 2023/08/07 - 유동인구 생성 요청 타입 - by 1-blue */
 export interface ApiCreateFloatingPopulationRequest
@@ -57,7 +57,7 @@ export interface ApiFindManyFloatingPopulationRequest {
 }
 /** 2023/07/11 - 여러 유동인구들 요청 응답 타입 - by 1-blue */
 export interface ApiFindManyFloatingPopulationResponse {
-  count: number;
+  pageInfo: PageInfo;
   datas: FloatingPopulation[];
 }
 /** 2023/07/11 - 여러 유동인구들 요청 핸들러 타입 - by 1-blue */

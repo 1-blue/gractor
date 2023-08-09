@@ -23,3 +23,11 @@ export interface Coords {
   /** 경도 */
   longitude: number;
 }
+
+/** 2023/08/08 - 페이지 정보 타입 - by 1-blue */
+export interface PageInfo {
+  currentPage: number;
+  totalPage: number;
+  totalCount: number;
+  hasNextPage: boolean;
+}

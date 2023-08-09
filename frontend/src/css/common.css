@@ -4,3 +4,20 @@ input::-webkit-inner-spin-button {
   -moz-appearance: none;
   -webkit-appearance: none;
 }
+
+/* 페이지네이션 라이브러리 커스텀 ( react-js-pagination ) */
+.my-pagination {
+ @apply flex space-x-2;
+}
+.my-pagination > li {
+  @apply w-6 h-6 border border-main-500 text-main-500 rounded-sm flex justify-center items-center text-sm cursor-pointer;
+}
+.my-pagination > .active {
+  @apply bg-main-500 text-white;
+}
+.my-pagination > .disabled {
+  @apply border-sub-500 cursor-not-allowed;
+}
+.my-pagination > .disabled svg {
+  @apply text-sub-500 cursor-not-allowed;
+}
