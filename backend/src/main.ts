@@ -9,7 +9,7 @@ async function bootstrap() {
   // cors
   app.enableCors({
     credentials: true,
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:8000"],
   });
 
   // pipe
@@ -25,6 +25,6 @@ async function bootstrap() {
     }),
   );
 
-  await app.listen(8000);
+  await app.listen(8001);
 }
 bootstrap();

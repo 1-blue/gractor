@@ -17,9 +17,15 @@ export class FloatingPopulationService {
 
   /** 2023/08/07 - 유동인구 생성 - by 1-blue */
   async create({ coords: { latitude, longitude }, ...body }: CreateDto) {
+    const exCoords = await this.prismaService.coords.findUnique({
+      where: { latitude_longitude: { latitude, longitude } },
+      include: { floatingPopulations: { select: { name: true } } },
+    });
+
     return await this.prismaService.floatingPopulation.create({
       data: {
         ...body,
+        ...(exCoords && { name: exCoords.floatingPopulations[0].name }),
         coords: {
           connectOrCreate: {
             // 이미 존재한다면 연결
@@ -41,8 +47,10 @@ export class FloatingPopulationService {
       [key: string]: FloatingPopulation[];
     }>((group, curr) => {
       const { name } = curr;
+
       group[name] = group[name] ?? [];
       group[name].push(curr);
+
       return group;
     }, {});
   }
@@ -65,14 +73,21 @@ export class FloatingPopulationService {
     const [count, datas] = await Promise.all([
       this.prismaService.floatingPopulation.count(),
       this.prismaService.floatingPopulation.findMany({
-        ...(from !== -1 && { cursor: { idx: from } }),
-        skip: from === -1 ? 0 : 1,
+        skip: from * size,
         take: size,
         orderBy: [{ date: "desc" }],
       }),
     ]);
 
-    return { count, datas };
+    return {
+      pageInfo: {
+        currentPage: from,
+        totalPage: Math.ceil(from / count),
+        totalCount: count,
+        hasNextPage: from * size < count,
+      },
+      datas,
+    };
   }
   /** 2023/08/07 - 유동인구 수정 - by 1-blue */
   async update(

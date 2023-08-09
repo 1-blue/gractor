@@ -7,11 +7,12 @@ import type { Prisma } from "@prisma/client";
 
 /** (주) 그렉터 유동인구의 하루 가짜 데이터들 */
 const getMocFloatingPopulation = (
+  count: number,
   name: string,
   coordsIdx: number,
   value: number,
 ): Prisma.FloatingPopulationCreateManyInput[] =>
-  Array(23)
+  Array(count)
     .fill(null)
     .map((_v, i) => i + 1)
     .map((v) => ({
@@ -43,19 +44,19 @@ async function main() {
   await Promise.all([
     prisma.floatingPopulation.createMany({
       skipDuplicates: true,
-      data: getMocFloatingPopulation("(주) 그렉터", 1, 300),
+      data: getMocFloatingPopulation(6, "(주) 그렉터", 1, 300),
     }),
     prisma.floatingPopulation.createMany({
       skipDuplicates: true,
-      data: getMocFloatingPopulation("잠실종합운동장", 2, 700),
+      data: getMocFloatingPopulation(23, "잠실종합운동장", 2, 700),
     }),
     prisma.floatingPopulation.createMany({
       skipDuplicates: true,
-      data: getMocFloatingPopulation("아시아공원", 3, 500),
+      data: getMocFloatingPopulation(23, "아시아공원", 3, 500),
     }),
     prisma.floatingPopulation.createMany({
       skipDuplicates: true,
-      data: getMocFloatingPopulation("송파어린이도서관", 4, 900),
+      data: getMocFloatingPopulation(23, "송파어린이도서관", 4, 900),
     }),
   ]);
 }
