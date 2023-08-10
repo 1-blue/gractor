@@ -24,7 +24,7 @@ const Map: React.FC<Props> = ({ datas, selectedList, setSelectedList }) => {
   const lng = target ? target.longitude : LONGITUDE;
 
   return (
-    <KakaoMap center={{ lat, lng }} className="w-full h-[500px]" level={4}>
+    <KakaoMap center={{ lat, lng }} className="w-full h-full" level={6}>
       {datas.map(({ latitude, longitude, name }) => (
         <MapMarker
           key={latitude + longitude}

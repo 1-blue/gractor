@@ -26,7 +26,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-      <article className="flex space-x-8 mb-4">
+      <article className="flex space-x-8 mb-4 absolute top-0 left-0 z-10">
         {/* 총 유동인구 통계 */}
         <section className="p-2 bg-sub-300 rounded-md">
           <Chart.Donut
@@ -74,7 +74,7 @@ const Dashboard: React.FC = () => {
       </article>
 
       {/* 지도 */}
-      <article>
+      <article className="w-full h-full">
         <Map
           datas={keys.map((key) => ({
             ...floatingPopulations[key][0].coords,
